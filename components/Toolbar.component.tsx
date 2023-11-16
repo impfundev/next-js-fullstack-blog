@@ -21,7 +21,7 @@ export default function Toolbar({ editor }: Toolbar) {
   }
 
   return (
-    <div className="flex gap-4 m-5 light">
+    <div className="flex flex-wrap gap-4 m-5 light">
       <Button
         size="sm"
         onClick={() => editor.chain().focus().toggleBold().run()}

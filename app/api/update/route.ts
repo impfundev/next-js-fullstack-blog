@@ -11,7 +11,6 @@ export async function POST(req: Request) {
       title: string;
       excerpt: string;
       content: string;
-      status: string;
       published: boolean;
     };
 

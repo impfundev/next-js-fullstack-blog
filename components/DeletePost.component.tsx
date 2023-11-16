@@ -1,16 +1,20 @@
 "use client";
 
-import { useState } from "react";
+import { useAppSelector, useAppDispatch } from "@/app/redux/hook";
+import { setLoading } from "@/app/features/loadingSlice";
+import { revalidateAction } from "@/app/features/revalidate";
+
 import { Button } from "@nextui-org/button";
-import { Form } from "../lib/types";
+import { Form } from "@/lib/types";
 
 export default function DeletePost({ id }: Form) {
-  let [loading, setLoading] = useState(false);
+  const loading = useAppSelector((state) => state.loading.value);
+  const dispatch = useAppDispatch();
   let postId = {
     id: id,
   };
   const handleDelete = async () => {
-    setLoading(true);
+    dispatch(setLoading(true));
     try {
       const res = await fetch("/api/delete", {
         method: "DELETE",
@@ -19,14 +23,14 @@ export default function DeletePost({ id }: Form) {
           "Content-Type": "application/json",
         },
       });
-      setLoading(false);
-      window.location.reload();
+      dispatch(setLoading(false));
+      revalidateAction("/");
       if (!res.ok) {
         alert((await res.json()).message);
         return;
       }
     } catch (error: any) {
-      setLoading(false);
+      dispatch(setLoading(false));
       console.error(error);
       alert(error.message);
     }

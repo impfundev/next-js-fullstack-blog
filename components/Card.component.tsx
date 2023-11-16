@@ -1,7 +1,6 @@
 import { Card, CardHeader, CardBody, CardFooter } from "@nextui-org/card";
 import { Divider } from "@nextui-org/divider";
 import { Button } from "@nextui-org/button";
-import { Image } from "@nextui-org/image";
 import Markdown from "react-markdown";
 import IconUser from "./icon/User.icon";
 import DeletePost from "./DeletePost.component";
@@ -10,14 +9,7 @@ import { getServerSession } from "next-auth";
 import { authOptions } from "../lib/auth";
 import { Form } from "../lib/types";
 
-export default async function App({
-  author,
-  title,
-  excerpt,
-  image,
-  slug,
-  id,
-}: Form) {
+export default async function App({ author, title, excerpt, id }: Form) {
   const session = await getServerSession(authOptions);
   return (
     <Card className="w-full">
@@ -29,7 +21,6 @@ export default async function App({
       </CardHeader>
       <Divider />
       <CardBody>
-        <Image isZoomed className="w-full" alt={title} src={image} />
         <h2 className="text-2xl font-bold tracking-wide py-4">{title}</h2>
         <Markdown>{excerpt}</Markdown>
       </CardBody>

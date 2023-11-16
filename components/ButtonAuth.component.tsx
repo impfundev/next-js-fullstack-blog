@@ -5,13 +5,26 @@ import { Tooltip } from "@nextui-org/tooltip";
 import { signIn, signOut } from "next-auth/react";
 import Link from "next/link";
 
-import ModalRegister from "./Register.component";
-import IconLogout from "./icon/LogOut.icon";
-import IconLogin from "./icon/LogIn.icon";
+import ModalRegister from "@/components/Register.component";
+import IconLogout from "@/components/icon/LogOut.icon";
+import IconLogin from "@/components/icon/LogIn.icon";
+
+import { useAppSelector, useAppDispatch } from "@/app/redux/hook";
+import { setLoading } from "@/app/features/loadingSlice";
 
 export const LoginButton = () => {
+  const loading = useAppSelector((state) => state.loading.value);
+  const dispatch = useAppDispatch();
   return (
-    <Button color="primary" variant="shadow" onClick={() => signIn()}>
+    <Button
+      isLoading={loading}
+      color="primary"
+      onClick={() => {
+        dispatch(setLoading(true));
+        signIn();
+        dispatch(setLoading(false));
+      }}
+    >
       <IconLogin width="1rem" height="1rem" />
       Sign In
     </Button>
@@ -23,9 +36,18 @@ export const RegisterButton = () => {
 };
 
 export const LogoutButton = () => {
+  const loading = useAppSelector((state) => state.loading.value);
+  const dispatch = useAppDispatch();
   return (
     <Tooltip content="Sign Out">
-      <Button color="primary" variant="shadow" onClick={() => signOut()}>
+      <Button
+        color="primary"
+        onClick={() => {
+          dispatch(setLoading(true));
+          signOut();
+          dispatch(setLoading(false));
+        }}
+      >
         <IconLogout width="1rem" height="1rem" />
         Sign Out
       </Button>

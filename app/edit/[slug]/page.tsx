@@ -1,10 +1,8 @@
-import slugify from "slugify";
 import { getServerSession } from "next-auth";
 import { redirect } from "next/navigation";
-import { Card } from "@nextui-org/card";
-import { authOptions } from "../../../lib/auth";
-import posts from "../../../lib/posts";
-import Update from "../../../components/Update.component";
+import { authOptions } from "@/lib/auth";
+import posts from "@/lib/posts";
+import { FormPost } from "@/app/form/FormPost";
 
 export default async function EditPost({
   params,
@@ -15,9 +13,10 @@ export default async function EditPost({
   const allPosts = await posts();
   const post = allPosts.posts.find((post) => post.id === params.slug);
   return (
-    <Card className="light">
+    <>
       {session ? (
-        <Update
+        <FormPost
+          type="update"
           id={post!.id}
           title={post!.title}
           excerpt={post!.excerpt}
@@ -27,7 +26,7 @@ export default async function EditPost({
       ) : (
         redirect("/api/auth/signin")
       )}
-    </Card>
+    </>
   );
 }
 

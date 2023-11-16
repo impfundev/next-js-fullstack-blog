@@ -6,11 +6,7 @@ import {
 } from "@nextui-org/navbar";
 import { Button } from "@nextui-org/button";
 import { Tooltip } from "@nextui-org/tooltip";
-import {
-  LoginButton,
-  LogoutButton,
-  RegisterButton,
-} from "./ButtonAuth.component";
+import { LoginButton, RegisterButton } from "./ButtonAuth.component";
 import { getServerSession } from "next-auth";
 import { authOptions } from "../lib/auth";
 import Link from "next/link";
@@ -35,20 +31,17 @@ export default async function App() {
       </NavbarBrand>
       {session ? (
         <NavbarContent justify="end">
-          <NavbarItem>
-            <Link href="/createnote">
+          <NavbarItem className="hidden md:flex">
+            <Link href="/create">
               <Tooltip content="Add New Post">
-                <Button color="primary" variant="shadow">
+                <Button color="primary">
                   <IconAdd width="1rem" height="1rem" />
                   New Post
                 </Button>
               </Tooltip>
             </Link>
           </NavbarItem>
-          <NavbarItem>
-            <LogoutButton />
-          </NavbarItem>
-          <NavbarItem>
+          <NavbarItem className="hidden md:flex">
             <UserComponent
               name={session.user!.name!}
               email={session.user!.email!}
