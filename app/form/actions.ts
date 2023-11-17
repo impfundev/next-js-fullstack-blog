@@ -1,4 +1,4 @@
-import { Form } from "@/lib/types";
+import { Form } from "@/app/lib/types";
 
 export async function createPost(data: Form) {
   const res = await fetch("/api/posts", {

@@ -1,7 +1,7 @@
-import Card from "../components/Card.component";
+import Card from "./components/Card.component";
 import { getServerSession } from "next-auth";
-import { authOptions } from "../lib/auth";
-import posts from "../lib/posts";
+import { authOptions } from "./lib/auth";
+import posts from "./lib/posts";
 import slugify from "slugify";
 
 export default async function Home() {

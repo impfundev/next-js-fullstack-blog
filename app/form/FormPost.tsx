@@ -6,7 +6,7 @@ import { createPost, updatePost } from "@/app/form/actions";
 import { useAppSelector, useAppDispatch } from "@/app/redux/hook";
 import { setLoading } from "@/app/features/loadingSlice";
 import { useRouter } from "next/navigation";
-import { Form } from "@/lib/types";
+import { Form } from "@/app/lib/types";
 
 import { Input } from "@nextui-org/input";
 import RichText from "@/components/RichText.component";

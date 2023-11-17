@@ -1,9 +1,9 @@
 import { Popover, PopoverTrigger, PopoverContent } from "@nextui-org/popover";
 import { Button } from "@nextui-org/button";
 
-import IconUser from "@/components/icon/User.icon";
+import IconUser from "@/app/components/icon/User.icon";
 import { LogoutButton } from "./ButtonAuth.component";
-import { User } from "@/lib/types";
+import { User } from "@/app/lib/types";
 
 export default function UserComponent({ name, email }: User) {
   return (

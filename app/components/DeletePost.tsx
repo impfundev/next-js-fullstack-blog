@@ -5,7 +5,7 @@ import { setLoading } from "@/app/features/loadingSlice";
 import { revalidateAction } from "@/app/features/revalidate";
 
 import { Button } from "@nextui-org/button";
-import { Form } from "@/lib/types";
+import { Form } from "@/app/lib/types";
 
 export default function DeletePost({ id }: Form) {
   const loading = useAppSelector((state) => state.loading.value);

@@ -2,12 +2,12 @@ import { Card, CardHeader, CardBody, CardFooter } from "@nextui-org/card";
 import { Divider } from "@nextui-org/divider";
 import { Button } from "@nextui-org/button";
 import Markdown from "react-markdown";
-import IconUser from "./icon/User.icon";
-import DeletePost from "./DeletePost.component";
+import IconUser from "@/app/components/icon/User.icon";
+import DeletePost from "@/app/components/DeletePost";
 import Link from "next/link";
 import { getServerSession } from "next-auth";
-import { authOptions } from "../lib/auth";
-import { Form } from "../lib/types";
+import { authOptions } from "@/app/lib/auth";
+import { Form } from "@/app/lib/types";
 
 export default async function App({ author, title, excerpt, id }: Form) {
   const session = await getServerSession(authOptions);

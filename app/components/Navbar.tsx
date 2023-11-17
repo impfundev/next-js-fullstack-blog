@@ -6,12 +6,12 @@ import {
 } from "@nextui-org/navbar";
 import { Button } from "@nextui-org/button";
 import { Tooltip } from "@nextui-org/tooltip";
-import { LoginButton, RegisterButton } from "./ButtonAuth.component";
+import { LoginButton, RegisterButton } from "@/app/components/ButtonAuth.component";
 import { getServerSession } from "next-auth";
-import { authOptions } from "../lib/auth";
+import { authOptions } from "@/app/lib/auth";
 import Link from "next/link";
-import IconAdd from "./icon/Add.icon";
-import UserComponent from "./User.component";
+import IconAdd from "@/app/components/icon/Add.icon";
+import UserComponent from "@/app/components/User";
 
 export default async function App() {
   const session = await getServerSession(authOptions);

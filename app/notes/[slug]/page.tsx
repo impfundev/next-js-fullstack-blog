@@ -1,5 +1,5 @@
 import slugify from "slugify";
-import posts from "../../../lib/posts";
+import posts from "../../lib/posts";
 
 export default async function Notes({ params }: { params: { slug: string } }) {
   const allPosts = await posts();

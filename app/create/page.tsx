@@ -1,6 +1,6 @@
 import { getServerSession } from "next-auth";
 import { redirect } from "next/navigation";
-import { authOptions } from "@/lib/auth";
+import { authOptions } from "@/app/lib/auth";
 import { FormPost } from "@/app/form/FormPost";
 
 export default async function CreateNote() {

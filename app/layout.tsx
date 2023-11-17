@@ -1,8 +1,8 @@
-import "./globals.css";
+import "@/app/globals.css";
 import type { Metadata } from "next";
 import { Rubik } from "next/font/google";
-import { Providers } from "./providers";
-import Navbar from "../components/Navbar.component";
+import { Providers } from "@/app/providers";
+import Navbar from "@/app/components/Navbar";
 
 const rubik = Rubik({
   weight: ["300", "400", "500", "600", "700"],

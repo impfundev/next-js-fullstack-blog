@@ -1,7 +1,7 @@
 import { getServerSession } from "next-auth";
 import { redirect } from "next/navigation";
-import { authOptions } from "@/lib/auth";
-import posts from "@/lib/posts";
+import { authOptions } from "@/app/lib/auth";
+import posts from "@/app/lib/posts";
 import { FormPost } from "@/app/form/FormPost";
 
 export default async function EditPost({

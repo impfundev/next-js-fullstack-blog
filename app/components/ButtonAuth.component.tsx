@@ -5,9 +5,9 @@ import { Tooltip } from "@nextui-org/tooltip";
 import { signIn, signOut } from "next-auth/react";
 import Link from "next/link";
 
-import ModalRegister from "@/components/Register.component";
-import IconLogout from "@/components/icon/LogOut.icon";
-import IconLogin from "@/components/icon/LogIn.icon";
+import ModalRegister from "@/app/components/Register";
+import IconLogout from "@/app/components/icon/LogOut.icon";
+import IconLogin from "@/app/components/icon/LogIn.icon";
 
 import { useAppSelector, useAppDispatch } from "@/app/redux/hook";
 import { setLoading } from "@/app/features/loadingSlice";
