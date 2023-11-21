@@ -1,7 +1,7 @@
 "use client";
 
 import { configureStore } from "@reduxjs/toolkit";
-import loadingSlice from "@/app/features/loadingSlice";
+import loadingSlice from "@/app/lib/features/loadingSlice";
 
 const store = configureStore({
   reducer: {

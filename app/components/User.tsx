@@ -2,14 +2,14 @@ import { Popover, PopoverTrigger, PopoverContent } from "@nextui-org/popover";
 import { Button } from "@nextui-org/button";
 
 import IconUser from "@/app/components/icon/User.icon";
-import { LogoutButton } from "./ButtonAuth.component";
+import { LogoutButton } from "@/app/components/AuthComponents";
 import { User } from "@/app/lib/types";
 
 export default function UserComponent({ name, email }: User) {
   return (
     <Popover placement="bottom" showArrow={true}>
       <PopoverTrigger>
-        <Button color="primary">
+        <Button className="bg-white border">
           <IconUser width={16} height={16} />
           {name}
         </Button>

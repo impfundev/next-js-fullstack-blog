@@ -6,7 +6,7 @@ import {
 } from "@nextui-org/navbar";
 import { Button } from "@nextui-org/button";
 import { Tooltip } from "@nextui-org/tooltip";
-import { LoginButton, RegisterButton } from "@/app/components/ButtonAuth.component";
+import { LoginButton, RegisterButton } from "@/app/components/AuthComponents";
 import { getServerSession } from "next-auth";
 import { authOptions } from "@/app/lib/auth";
 import Link from "next/link";
@@ -32,9 +32,9 @@ export default async function App() {
       {session ? (
         <NavbarContent justify="end">
           <NavbarItem className="hidden md:flex">
-            <Link href="/create">
+            <Link href="/dashboard/create">
               <Tooltip content="Add New Post">
-                <Button color="primary">
+                <Button className="bg-white border">
                   <IconAdd width="1rem" height="1rem" />
                   New Post
                 </Button>

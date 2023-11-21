@@ -6,14 +6,14 @@ import {
   Strike,
   UnorderedList,
   OrderedList,
-} from "./icon/Toolbar.icon";
+} from "@/app/components/icon/Toolbar.icon";
 import {
   Button,
   Popover,
   PopoverContent,
   PopoverTrigger,
 } from "@nextui-org/react";
-import { Toolbar } from "../lib/types";
+import { Toolbar } from "@/app/lib/types";
 
 export default function Toolbar({ editor }: Toolbar) {
   if (!editor) {

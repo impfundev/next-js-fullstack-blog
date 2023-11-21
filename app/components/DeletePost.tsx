@@ -1,8 +1,8 @@
 "use client";
 
-import { useAppSelector, useAppDispatch } from "@/app/redux/hook";
-import { setLoading } from "@/app/features/loadingSlice";
-import { revalidateAction } from "@/app/features/revalidate";
+import { useAppSelector, useAppDispatch } from "@/app/lib/redux/hook";
+import { setLoading } from "@/app/lib/features/loadingSlice";
+import { revalidateAction } from "@/app/lib/features/revalidate";
 
 import { Button } from "@nextui-org/button";
 import { Form } from "@/app/lib/types";
@@ -23,8 +23,8 @@ export default function DeletePost({ id }: Form) {
           "Content-Type": "application/json",
         },
       });
-      dispatch(setLoading(false));
       revalidateAction("/");
+      dispatch(setLoading(false));
       if (!res.ok) {
         alert((await res.json()).message);
         return;

@@ -4,8 +4,8 @@ import { EditorContent, useEditor } from "@tiptap/react";
 import StarterKit from "@tiptap/starter-kit";
 import Placeholder from "@tiptap/extension-placeholder";
 
-import Toolbar from "./Toolbar.component";
-import { RichText } from "../lib/types";
+import Toolbar from "@/app/components/Toolbar";
+import { RichText } from "@/app/lib/types";
 
 export default function RichText({ name, content, onChange }: RichText) {
   const editor = useEditor({
@@ -18,13 +18,13 @@ export default function RichText({ name, content, onChange }: RichText) {
       }),
     ],
     content: content,
-    onUpdate: ({ editor }) => {
+    onUpdate({ editor }) {
       const html = editor.getHTML();
       onChange!(html, name!);
     },
     editorProps: {
       attributes: {
-        class: "prose lg:prose-xl dark:prose-invert m-5 focus:outline-none",
+        class: "prose lg:prose-xl focus:outline-none",
       },
     },
   });

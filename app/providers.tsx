@@ -2,7 +2,7 @@
 
 import { Provider } from "react-redux";
 import { NextUIProvider } from "@nextui-org/react";
-import store from "@/app/redux/store";
+import store from "@/app/lib/redux/store";
 
 export function Providers({ children }: { children: React.ReactNode }) {
   return (

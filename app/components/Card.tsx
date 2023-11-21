@@ -1,6 +1,7 @@
 import { Card, CardHeader, CardBody, CardFooter } from "@nextui-org/card";
 import { Divider } from "@nextui-org/divider";
 import { Button } from "@nextui-org/button";
+import { Chip } from "@nextui-org/chip";
 import Markdown from "react-markdown";
 import IconUser from "@/app/components/icon/User.icon";
 import DeletePost from "@/app/components/DeletePost";
@@ -9,7 +10,13 @@ import { getServerSession } from "next-auth";
 import { authOptions } from "@/app/lib/auth";
 import { Form } from "@/app/lib/types";
 
-export default async function App({ author, title, excerpt, id }: Form) {
+export default async function App({
+  author,
+  title,
+  excerpt,
+  id,
+  published,
+}: Form) {
   const session = await getServerSession(authOptions);
   return (
     <Card className="w-full">
@@ -26,7 +33,7 @@ export default async function App({ author, title, excerpt, id }: Form) {
       </CardBody>
       {session && (
         <CardFooter className="gap-2">
-          <Link className="w-full" href={`/edit/${id}`}>
+          <Link className="w-full" href={`/dashboard/edit/${id}`}>
             <Button className="w-full" color="primary">
               Edit
             </Button>

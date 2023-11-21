@@ -12,14 +12,17 @@ import {
   useDisclosure,
   Input,
 } from "@nextui-org/react";
-import { MailIcon } from "./icon/Mail.icon";
-import { LockIcon } from "./icon/Lock.icon";
-import IconUser from "./icon/User.icon";
-import IconUserAdd from "./icon/UserAdd.icon";
-import { ModalType } from "../lib/types";
+import { MailIcon } from "@/app/components/icon/Mail.icon";
+import { LockIcon } from "@/app/components/icon/Lock.icon";
+import IconUser from "@/app/components/icon/User.icon";
+import IconUserAdd from "@/app/components/icon/UserAdd.icon";
+import { ModalType } from "@/app/lib/types";
+import { useAppSelector, useAppDispatch } from "@/app/lib/redux/hook";
+import { setLoading } from "@/app/lib/features/loadingSlice";
 
 export default function ModalRegister({ buttonText }: ModalType) {
-  let [loading, setLoading] = useState(false);
+  const loading = useAppSelector((state) => state.loading.value);
+  const dispatch = useAppDispatch();
   let [formValues, setFormValues] = useState({
     name: "",
     email: "",
@@ -28,7 +31,7 @@ export default function ModalRegister({ buttonText }: ModalType) {
 
   const onSubmit = async (event: React.FormEvent) => {
     event.preventDefault();
-    setLoading(true);
+    dispatch(setLoading(true));
 
     try {
       const res = await fetch("/api/register", {
@@ -39,7 +42,7 @@ export default function ModalRegister({ buttonText }: ModalType) {
         },
       });
 
-      setLoading(false);
+      dispatch(setLoading(false));
       if (!res.ok) {
         alert((await res.json()).message);
         return;
@@ -47,7 +50,7 @@ export default function ModalRegister({ buttonText }: ModalType) {
 
       signIn(undefined, { callbackUrl: "/" });
     } catch (error: any) {
-      setLoading(false);
+      dispatch(setLoading(false));
       console.error(error);
       alert(error.message);
     }
@@ -62,7 +65,7 @@ export default function ModalRegister({ buttonText }: ModalType) {
 
   return (
     <>
-      <Button onPress={onOpen} color="primary" variant="shadow">
+      <Button onPress={onOpen} className="bg-white border">
         <IconUserAdd width="1rem" height="1rem" />
         {buttonText}
       </Button>
@@ -123,7 +126,7 @@ export default function ModalRegister({ buttonText }: ModalType) {
                   <Button
                     isLoading={loading}
                     disabled={loading}
-                    color="primary"
+                    className="bg-white border"
                     type="submit"
                   >
                     {loading ? "loading" : "Sign Up"}
