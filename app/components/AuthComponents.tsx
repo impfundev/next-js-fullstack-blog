@@ -16,6 +16,7 @@ export const LoginButton = () => {
   const dispatch = useAppDispatch();
   return (
     <Button
+      size="sm"
       isLoading={loading}
       className="bg-white border"
       onClick={() => {
@@ -39,6 +40,7 @@ export const LogoutButton = () => {
   const dispatch = useAppDispatch();
   return (
     <Button
+      size="sm"
       className="bg-white border"
       onClick={() => {
         dispatch(setLoading(true));

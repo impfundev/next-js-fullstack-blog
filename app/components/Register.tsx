@@ -65,7 +65,7 @@ export default function ModalRegister({ buttonText }: ModalType) {
 
   return (
     <>
-      <Button onPress={onOpen} className="bg-white border">
+      <Button size="sm" onPress={onOpen} className="bg-white border">
         <IconUserAdd width="1rem" height="1rem" />
         {buttonText}
       </Button>

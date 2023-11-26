@@ -9,7 +9,7 @@ export default function UserComponent({ name, email }: User) {
   return (
     <Popover placement="bottom" showArrow={true}>
       <PopoverTrigger>
-        <Button className="bg-white border">
+        <Button size="sm" className="bg-white border">
           <IconUser width={16} height={16} />
           {name}
         </Button>
