@@ -2,30 +2,27 @@
 
 import { useState, ChangeEvent, FormEvent } from "react";
 import { signIn } from "next-auth/react";
-import {
-  Tabs,
-  Tab,
-  Input,
-  Link,
-  Button,
-  Card,
-  CardBody,
-} from "@nextui-org/react";
+
+import Card from "@mui/joy/Card";
+import CardContent from "@mui/joy/CardContent";
+import Tabs from "@mui/joy/Tabs";
+import TabList from "@mui/joy/TabList";
+import Tab from "@mui/joy/Tab";
+import TabPanel from "@mui/joy/TabPanel";
+import Button from "@mui/joy/Button";
+import Input from "@mui/joy/Input";
+import FormControl from "@mui/joy/FormControl";
+import FormLabel from "@mui/joy/FormLabel";
+
+import VisibilityIcon from "@mui/icons-material/Visibility";
+import VisibilityOffIcon from "@mui/icons-material/VisibilityOff";
+
 import { useAppSelector, useAppDispatch } from "@/app/lib/redux/hook";
 import { setLoading } from "@/app/lib/features/loadingSlice";
 import { revalidateAction } from "@/app/lib/features/revalidate";
 import { useRouter } from "next/navigation";
 
 export default function FormAuth() {
-  const [selected, setSelected] = useState("login");
-  const handleSelected = () => {
-    if (selected === "login") {
-      setSelected("sign-up");
-    } else {
-      setSelected("login");
-    }
-  };
-
   const loading = useAppSelector((state) => state.loading.value);
   const dispatch = useAppDispatch();
   let [formValues, setFormValues] = useState({
@@ -33,6 +30,7 @@ export default function FormAuth() {
     email: "",
     password: "",
   });
+  const [passwordShown, setPasswordShown] = useState(false);
   const router = useRouter();
 
   const onLogin = async (event: FormEvent) => {
@@ -105,101 +103,112 @@ export default function FormAuth() {
 
   return (
     <Card className="max-w-full">
-      <CardBody className="overflow-hidden">
-        <Tabs
-          fullWidth
-          size="md"
-          aria-label="Tabs form"
-          selectedKey={selected}
-          onSelectionChange={handleSelected}
-        >
-          <Tab key="login" title="Login">
+      <CardContent className="overflow-hidden">
+        <Tabs aria-label="Auth Page" defaultValue={0}>
+          <TabList className="grid w-full grid-cols-2">
+            <Tab>Login</Tab>
+            <Tab>Sign Up</Tab>
+          </TabList>
+          <TabPanel value={0}>
             <form onSubmit={onLogin} className="flex flex-col gap-4">
-              <Input
-                isRequired
-                name="email"
-                type="email"
-                label="Email"
-                placeholder="Enter your email"
-                value={formValues.email}
-                onChange={handleChange}
-              />
-              <Input
-                isRequired
-                name="password"
-                type="password"
-                label="Password"
-                placeholder="Enter your password"
-                value={formValues.password}
-                onChange={handleChange}
-              />
-              <p className="text-center text-small">
-                Need to create an account?{" "}
-                <Link size="sm" onPress={() => setSelected("sign-up")}>
-                  Sign up
-                </Link>
-              </p>
+              <FormControl>
+                <FormLabel>Email</FormLabel>
+                <Input
+                  required
+                  name="email"
+                  type="email"
+                  placeholder="Enter your email"
+                  value={formValues.email}
+                  onChange={handleChange}
+                />
+              </FormControl>
+              <FormControl>
+                <FormLabel>Password</FormLabel>
+                <Input
+                  required
+                  name="password"
+                  type={passwordShown ? "text" : "password"}
+                  placeholder="Enter your password"
+                  value={formValues.password}
+                  onChange={handleChange}
+                  endDecorator={
+                    <Button
+                      variant="plain"
+                      onClick={() => setPasswordShown(!passwordShown)}
+                    >
+                      {passwordShown ? (
+                        <VisibilityIcon />
+                      ) : (
+                        <VisibilityOffIcon />
+                      )}
+                    </Button>
+                  }
+                />
+              </FormControl>
               <div className="flex gap-2 justify-end">
-                <Button
-                  type="submit"
-                  isLoading={loading}
-                  fullWidth
-                  color="primary"
-                >
+                <Button loading={loading} type="submit">
                   Login
                 </Button>
               </div>
             </form>
-          </Tab>
-          <Tab key="sign-up" title="Sign up">
-            <form onSubmit={onSignUp} className="flex flex-col gap-4 h-[300px]">
-              <Input
-                isRequired
-                name="name"
-                type="text"
-                label="Name"
-                placeholder="Enter your name"
-                value={formValues.name}
-                onChange={handleChange}
-              />
-              <Input
-                isRequired
-                name="email"
-                type="email"
-                label="Email"
-                placeholder="Enter your email"
-                value={formValues.email}
-                onChange={handleChange}
-              />
-              <Input
-                isRequired
-                name="password"
-                type="password"
-                label="Password"
-                placeholder="Enter your password"
-                value={formValues.password}
-                onChange={handleChange}
-              />
-              <p className="text-center text-small">
-                Already have an account?{" "}
-                <Link size="sm" onPress={() => setSelected("login")}>
-                  Login
-                </Link>
-              </p>
+          </TabPanel>
+          <TabPanel value={1}>
+            <form onSubmit={onSignUp} className="flex flex-col gap-4">
+              <FormControl>
+                <FormLabel>Username</FormLabel>
+                <Input
+                  required
+                  name="name"
+                  type="text"
+                  placeholder="Enter your name"
+                  value={formValues.name}
+                  onChange={handleChange}
+                />
+              </FormControl>
+
+              <FormControl>
+                <FormLabel>Email</FormLabel>
+                <Input
+                  required
+                  name="email"
+                  type="email"
+                  placeholder="Enter your email"
+                  value={formValues.email}
+                  onChange={handleChange}
+                />
+              </FormControl>
+              <FormControl>
+                <FormLabel>Password</FormLabel>
+                <Input
+                  required
+                  name="password"
+                  type={passwordShown ? "text" : "password"}
+                  placeholder="Enter your password"
+                  value={formValues.password}
+                  onChange={handleChange}
+                  endDecorator={
+                    <Button
+                      variant="plain"
+                      onClick={() => setPasswordShown(!passwordShown)}
+                    >
+                      {passwordShown ? (
+                        <VisibilityIcon />
+                      ) : (
+                        <VisibilityOffIcon />
+                      )}
+                    </Button>
+                  }
+                />
+              </FormControl>
               <div className="flex gap-2 justify-end">
-                <Button
-                  fullWidth
-                  type="submit"
-                  color="primary"
-                  isLoading={loading}
-                >
+                <Button loading={loading} type="submit">
                   Sign up
                 </Button>
               </div>
             </form>
-          </Tab>
+          </TabPanel>
         </Tabs>
-      </CardBody>
+      </CardContent>
     </Card>
   );
 }

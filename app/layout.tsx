@@ -1,11 +1,10 @@
 import "@/app/globals.css";
 import type { Metadata } from "next";
-import { Rubik } from "next/font/google";
+import { Inter } from "next/font/google";
 import { Providers } from "@/app/providers";
 
-const rubik = Rubik({
+const inter = Inter({
   weight: ["300", "400", "500", "600", "700"],
-  style: ["normal", "italic"],
   subsets: ["latin"],
   display: "swap",
 });
@@ -22,7 +21,7 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en">
-      <body className={`${rubik.className} text-foreground bg-background`}>
+      <body className={`${inter.className}`}>
         <Providers>
           <main className="max-h-screen">{children}</main>
         </Providers>

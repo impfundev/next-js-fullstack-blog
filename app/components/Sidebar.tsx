@@ -11,14 +11,15 @@ export default async function Sidebar() {
     { text: "Posts", link: "/dashboard/posts" },
   ];
   return (
-    <div className="flex flex-col justify-between w-full h-screen max-w-[25vw] border-small border-default-200">
+    <div className="flex flex-col justify-between w-full h-screen max-w-[25vw] border-small border-default-200 border-r border-inherit">
       <div className="flex flex-col gap-10 py-10">
         <h1 className="text-xl font-bold px-10">Fullstack Blog</h1>
         <div className="items-center">
           {menus.map((menu) => {
             return (
               <Link
-                className="hover:bg-gray-200 flex items-center px-10 py-1"
+                key={menu.link}
+                className="hover:bg-gray-200 hover:text-black flex items-center px-10 py-1"
                 href={menu.link}
               >
                 {menu.text}

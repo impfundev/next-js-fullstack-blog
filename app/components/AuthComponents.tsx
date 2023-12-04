@@ -1,10 +1,8 @@
 "use client";
 
-import { Button } from "@nextui-org/button";
+import Button from "@mui/joy/Button";
 import { signIn, signOut } from "next-auth/react";
 import Link from "next/link";
-
-import ModalRegister from "@/app/components/Register";
 import IconLogout from "@/app/components/icon/LogOut.icon";
 import IconLogin from "@/app/components/icon/LogIn.icon";
 
@@ -16,23 +14,18 @@ export const LoginButton = () => {
   const dispatch = useAppDispatch();
   return (
     <Button
+      loading={loading}
       size="sm"
-      isLoading={loading}
-      className="bg-white border"
       onClick={() => {
         dispatch(setLoading(true));
         signIn();
         dispatch(setLoading(false));
       }}
     >
-      <IconLogin width="1rem" height="1rem" />
+      <IconLogin className="mr-2" width="1rem" height="1rem" />
       Sign In
     </Button>
   );
-};
-
-export const RegisterButton = () => {
-  return <ModalRegister buttonText="Sign Up" />;
 };
 
 export const LogoutButton = () => {
@@ -40,16 +33,16 @@ export const LogoutButton = () => {
   const dispatch = useAppDispatch();
   return (
     <Button
+      loading={loading}
       size="sm"
-      className="bg-white border"
       onClick={() => {
         dispatch(setLoading(true));
         signOut();
         dispatch(setLoading(false));
       }}
     >
-      <IconLogout width="1rem" height="1rem" />
-      Sign Out
+      <IconLogout className="mr-2" width="1rem" height="1rem" />
+      Log Out
     </Button>
   );
 };

@@ -8,9 +8,9 @@ import { setLoading } from "@/app/lib/features/loadingSlice";
 import { useRouter } from "next/navigation";
 import { Form } from "@/app/lib/types";
 
-import { Textarea } from "@nextui-org/input";
-import { Button } from "@nextui-org/button";
-import { Checkbox } from "@nextui-org/checkbox";
+import Textarea from "@mui/joy/Textarea";
+import Button from "@mui/joy/Button";
+import Checkbox from "@mui/joy/Checkbox";
 import { revalidateAction } from "@/app/lib/features/revalidate";
 import RichText from "@/app/components/RichText";
 
@@ -38,15 +38,16 @@ export function FormPost({
     const { name, value } = event.target;
     setFormValues({ ...formValues, [name]: value });
   };
+  const handleTextArea = (event: ChangeEvent<HTMLTextAreaElement>) => {
+    const { name, value } = event.target;
+    setFormValues({ ...formValues, [name]: value });
+  };
   const handleContent = (html: string, name: string) => {
     setFormValues({ ...formValues, [name]: html });
   };
-  const handlePublish = (e: ChangeEvent<HTMLInputElement>) => {
-    const checked = e.target.checked;
-    setFormValues((prevFormValues) => ({
-      ...prevFormValues,
-      published: checked,
-    }));
+  const handlePublish = (event: ChangeEvent<HTMLInputElement>) => {
+    const { name, checked } = event.target;
+    setFormValues({ ...formValues, [name]: checked });
     setSelected(checked);
   };
   const onSubmit = (e: React.SyntheticEvent) => {
@@ -100,26 +101,19 @@ export function FormPost({
       </div>
       <div className="flex flex-col gap-4 md:w-1/4">
         <Textarea
-          classNames={{
-            base: "max-w-xs",
-            input: "resize-y min-h-[40px]",
-          }}
-          disableAnimation
-          disableAutosize
-          type="text"
+          className="max-w-xs resize-y min-h-[40px]"
           id="excerpt"
           name="excerpt"
-          label="Excerpt"
           value={formValues.excerpt}
           placeholder="Enter Excerpt"
-          onChange={handleInput}
+          onChange={handleTextArea}
         />
         <Checkbox
-          type="checkbox"
           id="published"
           name="published"
+          label="published"
           checked={published || selected}
-          defaultSelected={published || selected}
+          defaultChecked={published || selected}
           onChange={handlePublish}
         >
           Publish{" "}
@@ -127,7 +121,7 @@ export function FormPost({
         <small className="text-gray-400">
           *If not checked, the post will be saved as a draft.
         </small>
-        <Button className="bg-white border-2" isLoading={loading} type="submit">
+        <Button loading={loading} type="submit">
           Submit
         </Button>
       </div>

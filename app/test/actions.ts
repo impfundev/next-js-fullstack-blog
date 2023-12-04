@@ -9,6 +9,7 @@ export async function createTodo(prevState: any, formData: FormData) {
     excerpt: z.string().min(1),
     content: z.string().min(1),
     published: z.boolean(),
+    image: z.any(),
   });
 
   const parse = schema.safeParse({
@@ -16,6 +17,7 @@ export async function createTodo(prevState: any, formData: FormData) {
     excerpt: formData.get("excerpt"),
     content: formData.get("content"),
     published: formData.get("published") === "published",
+    image: formData.get("image"),
   });
 
   if (!parse.success) {
@@ -24,9 +26,13 @@ export async function createTodo(prevState: any, formData: FormData) {
   }
 
   const data = parse.data;
-
   try {
     console.log(data);
+    const { image } = data;
+    const response = await fetch("/api/upload", {
+      method: "POST",
+      body: image,
+    });
     return { message: `Added post with title ${data.title}` };
   } catch (e) {
     console.error(`Error: ${e}`);

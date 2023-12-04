@@ -7,12 +7,14 @@ import {
   UnorderedList,
   OrderedList,
 } from "@/app/components/icon/Toolbar.icon";
-import {
-  Button,
-  Popover,
-  PopoverContent,
-  PopoverTrigger,
-} from "@nextui-org/react";
+
+import Button from "@mui/joy/Button";
+import Dropdown from "@mui/joy/Dropdown";
+import Menu from "@mui/joy/Menu";
+import MenuButton from "@mui/joy/MenuButton";
+import MenuItem from "@mui/joy/MenuItem";
+import ToggleButtonGroup from "@mui/joy/ToggleButtonGroup";
+
 import { Toolbar } from "@/app/lib/types";
 
 export default function Toolbar({ editor }: Toolbar) {
@@ -21,7 +23,10 @@ export default function Toolbar({ editor }: Toolbar) {
   }
 
   return (
-    <div className="flex flex-wrap gap-4 m-5 light">
+    <ToggleButtonGroup
+      className="flex flex-wrap gap-4 m-5 bg-white dark:bg-black shadow-sm shadow-blue-400"
+      color="primary"
+    >
       <Button
         size="sm"
         onClick={() => editor.chain().focus().toggleBold().run()}
@@ -46,15 +51,10 @@ export default function Toolbar({ editor }: Toolbar) {
       >
         <Strike />
       </Button>
-      <Popover placement="top">
-        <PopoverTrigger>
-          <Button size="sm" className="font-bold">
-            Heading
-          </Button>
-        </PopoverTrigger>
-        <PopoverContent className="flex-row gap-2 p-2">
-          <Button
-            size="sm"
+      <Dropdown>
+        <MenuButton color="primary">Heading</MenuButton>
+        <Menu className="flex-row gap-2 p-2">
+          <MenuItem
             onClick={() =>
               editor.chain().focus().toggleHeading({ level: 1 }).run()
             }
@@ -63,9 +63,8 @@ export default function Toolbar({ editor }: Toolbar) {
             className="font-bold"
           >
             H1
-          </Button>
-          <Button
-            size="sm"
+          </MenuItem>
+          <MenuItem
             onClick={() =>
               editor.chain().focus().toggleHeading({ level: 2 }).run()
             }
@@ -74,9 +73,8 @@ export default function Toolbar({ editor }: Toolbar) {
             className="font-bold"
           >
             H2
-          </Button>
-          <Button
-            size="sm"
+          </MenuItem>
+          <MenuItem
             onClick={() =>
               editor.chain().focus().toggleHeading({ level: 3 }).run()
             }
@@ -85,9 +83,8 @@ export default function Toolbar({ editor }: Toolbar) {
             className="font-bold"
           >
             H3
-          </Button>
-          <Button
-            size="sm"
+          </MenuItem>
+          <MenuItem
             onClick={() =>
               editor.chain().focus().toggleHeading({ level: 4 }).run()
             }
@@ -96,9 +93,8 @@ export default function Toolbar({ editor }: Toolbar) {
             className="font-bold"
           >
             H4
-          </Button>
-          <Button
-            size="sm"
+          </MenuItem>
+          <MenuItem
             onClick={() =>
               editor.chain().focus().toggleHeading({ level: 5 }).run()
             }
@@ -107,9 +103,8 @@ export default function Toolbar({ editor }: Toolbar) {
             className="font-bold"
           >
             H5
-          </Button>
-          <Button
-            size="sm"
+          </MenuItem>
+          <MenuItem
             onClick={() =>
               editor.chain().focus().toggleHeading({ level: 6 }).run()
             }
@@ -118,9 +113,9 @@ export default function Toolbar({ editor }: Toolbar) {
             className="font-bold"
           >
             H6
-          </Button>
-        </PopoverContent>
-      </Popover>
+          </MenuItem>
+        </Menu>
+      </Dropdown>
       <Button
         size="sm"
         onClick={() => editor.chain().focus().toggleBulletList().run()}
@@ -137,6 +132,6 @@ export default function Toolbar({ editor }: Toolbar) {
       >
         <OrderedList />
       </Button>
-    </div>
+    </ToggleButtonGroup>
   );
 }

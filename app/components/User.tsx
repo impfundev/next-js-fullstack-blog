@@ -1,29 +1,30 @@
-import { Popover, PopoverTrigger, PopoverContent } from "@nextui-org/popover";
-import { Button } from "@nextui-org/button";
+"use client";
 
-import IconUser from "@/app/components/icon/User.icon";
+import Avatar from "@mui/joy/Avatar";
+import Dropdown from "@mui/joy/Dropdown";
+import Menu from "@mui/joy/Menu";
+import MenuButton from "@mui/joy/MenuButton";
+import MenuItem from "@mui/joy/MenuItem";
+
 import { LogoutButton } from "@/app/components/AuthComponents";
 import { User } from "@/app/lib/types";
 
 export default function UserComponent({ name, email }: User) {
   return (
-    <Popover placement="bottom" showArrow={true}>
-      <PopoverTrigger>
-        <Button size="sm" className="bg-white border">
-          <IconUser width={16} height={16} />
-          {name}
-        </Button>
-      </PopoverTrigger>
-      <PopoverContent>
-        <div className="flex flex-col gap-4 px-1 py-2">
-          <div>
-            <span className="text-small font-bold">{name}</span>
-            <br />
-            <span className="text-tiny">{email}</span>
-          </div>
-          <LogoutButton />
-        </div>
-      </PopoverContent>
-    </Popover>
+    <div className="flex justify-between p-4">
+      <div className="flex gap-2">
+        <Avatar />
+        <Dropdown>
+          <MenuButton className="rounded-full" size="sm">
+            {name}
+          </MenuButton>
+          <Menu>
+            <MenuItem>{name}</MenuItem>
+            <MenuItem>{email}</MenuItem>
+          </Menu>
+        </Dropdown>
+      </div>
+      <LogoutButton />
+    </div>
   );
 }

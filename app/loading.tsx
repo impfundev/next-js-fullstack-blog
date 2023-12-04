@@ -1,9 +1,7 @@
-import { Spinner } from "@nextui-org/spinner";
+import Skeleton from "@mui/joy/Skeleton";
 
 export default function Loading() {
   return (
-    <div className="h-screen flex items-center justify-center">
-      <Spinner size="lg" />
-    </div>
+    <Skeleton className="h-screen flex items-center justify-center"></Skeleton>
   );
 }

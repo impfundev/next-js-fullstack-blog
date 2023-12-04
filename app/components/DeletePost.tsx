@@ -4,7 +4,7 @@ import { useAppSelector, useAppDispatch } from "@/app/lib/redux/hook";
 import { setLoading } from "@/app/lib/features/loadingSlice";
 import { revalidateAction } from "@/app/lib/features/revalidate";
 
-import { Button } from "@nextui-org/button";
+import Button from "@mui/joy/Button";
 import { Form } from "@/app/lib/types";
 
 export default function DeletePost({ id }: Form) {
@@ -37,8 +37,8 @@ export default function DeletePost({ id }: Form) {
   };
   return (
     <Button
+      loading={loading}
       onClick={handleDelete}
-      isLoading={loading}
       className="w-full"
       color="danger"
     >
