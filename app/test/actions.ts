@@ -28,11 +28,6 @@ export async function createTodo(prevState: any, formData: FormData) {
   const data = parse.data;
   try {
     console.log(data);
-    const { image } = data;
-    const response = await fetch("/api/upload", {
-      method: "POST",
-      body: image,
-    });
     return { message: `Added post with title ${data.title}` };
   } catch (e) {
     console.error(`Error: ${e}`);
